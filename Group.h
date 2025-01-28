@@ -2,6 +2,7 @@
 #define GROUP
 
 #include <iostream>
+#include <string>
 
 
 enum Degree {
@@ -11,29 +12,8 @@ enum Degree {
     N, // not stated 
 };
 
-int compare(Group g1, Group g2) {
-    if (g1.degree == N || g2.degree == N) {
-        throw "degree is not stated";
-    }
 
-    if (g1.degree != g2.degree) {
-        return (g1.degree > g2.degree) ? 1 : -1;
-    }
-
-    for (int i = 0; i < 4; ++i) {
-        if (g1.number[i] > g2.number[i]) {
-            return 1;
-        }
-        else if (g1.number[i] < g2.number[i]) {
-            return -1;
-        }
-    }
-
-    return 0;
-}
-
-
-struct Group {
+class Group {
 public:
     Degree degree;
     unsigned int number[4];
@@ -54,25 +34,53 @@ public:
         }
     }
 
-    bool operator == (const Group& group) const
-    {
-        return compare(this, group) == 0;
-    }
-    bool operator != (const Group& group) const
-    {
-        return compare(this, group) != 0;
-    }
-    bool operator > (const Group& group) const
-    {
-        return compare(this, group) == 1;
-    }
-    bool operator < (const Group& group) const
-    {
-        return compare(this, group) == -1;
-    }
+    friend bool operator== (const Group& g1, const Group& g2);
+    friend bool operator!= (const Group& g1, const Group& g2); 
+    friend bool operator> (const Group& g1, const Group& g2);
+    friend bool operator< (const Group& g1, const Group& g2);
 };
 
-Group getKey(std::string line) {
+bool operator== (const Group& g1, const Group& g2) {
+    if (g1.degree != g2.degree) {
+        return false;
+    }
+
+    for (int i = 0; i < 4; ++i) {
+        if (g1.number[i] != g2.number[i]) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+bool operator!= (const Group& g1, const Group& g2) {
+    return !(g1 == g2);
+}
+
+bool operator> (const Group& g1, const Group& g2) {
+    if (g1.degree < g2.degree) {
+        return false;
+    }
+
+    for (int i = 0; i < 4; ++i) {
+        if (g1.number[i] < g2.number[i]) {
+            return false;
+        }
+
+        if (g1.number[i] > g2.number[i]) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+bool operator< (const Group& g1, const Group& g2) {
+    return !(g1 > g2);
+}
+
+Group getGroup(std::string line) {
     Degree degree = N;
 
     char lineDegree = line.at(0);
@@ -101,6 +109,28 @@ Group getKey(std::string line) {
     return key;
 }
 
+std::ostream& operator << (std::ostream& os, const Group& group) {
+    char degree = 'N';
 
+    switch (group.degree) {
+    case B:
+        degree = 'B';
+        break;
+    case M:
+        degree = 'M';
+        break;
+    case S:
+        degree = 'S';
+        break;
+    }
+
+    std::string number = "";
+
+    for (int i = 0; i < 4; ++i) {
+        number += std::to_string(group.number[i]);
+    }
+
+    return os << degree + number;
+}
 
 #endif 

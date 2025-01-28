@@ -4,7 +4,15 @@
 #include <iostream>
 using namespace std;
 
-struct FIO {
+int MAX_LENGTH = -INFINITY;
+
+void setMaxLength(string str) {
+	if (str.size() > MAX_LENGTH) {
+		MAX_LENGTH = str.size();
+	}
+}
+
+class FIO {
 public:
 	string f;
 	string i;
@@ -20,6 +28,9 @@ public:
 		f = p_f;
 		i = p_i;
 		o = p_o;
+
+		setMaxLength(f + ' ' + i + ' ' + o);
+		
 	}
 };
 
@@ -42,17 +53,40 @@ FIO getFIO(string line) {
 			else if (k == 1) {
 				i_borders[1] = j;
 				o_borders[0] = j + 1;
+				break;
 			}
 
 			k++;
 		}
 	}
-
 	string f = line.substr(f_borders[0], f_borders[1]);
-	string i = line.substr(i_borders[0], i_borders[1]);
-	string o = line.substr(o_borders[0], o_borders[1]);
+	string i = line.substr(i_borders[0], i_borders[1] - i_borders[0]);
+	string o = line.substr(o_borders[0], o_borders[1] - o_borders[0]);
 
 	return FIO(f, i, o);
 }
+
+std::ostream& operator << (std::ostream& os, const FIO& fio) {
+	string fioString = fio.f + " " + fio.i + " " + fio.o;
+	
+	if (fioString.size() < MAX_LENGTH) {
+		const int spacesAmount = MAX_LENGTH - fioString.size();
+		for (int i = 0; i < spacesAmount; ++i) {
+			fioString += ' ';
+		}
+	}
+
+	return os << fioString;
+}
+
+//std::ostream& operator << (std::ostream& os, const FIO& fio) {
+//	string fioString = fio.f + fio.i + fio.o;
+//
+//	//if (fio.getMaxLength())
+//
+//	int n = fio.
+//
+//	return os << fio.f << " " << fio.i << " " << fio.o;
+//}
 
 #endif 
