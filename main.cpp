@@ -16,7 +16,7 @@ int main() {
 
 	string line;
 
-	ifstream in("./input.txt");
+	ifstream in("./input4.txt");
 
 	if (!in.is_open()) {
 		cout << "hasn't found the file";

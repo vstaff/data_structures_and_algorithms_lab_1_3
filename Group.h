@@ -63,6 +63,10 @@ bool operator> (const Group& g1, const Group& g2) {
         return true;
     }
 
+    if (g1.degree < g2.degree) {
+        return false;
+    }
+
     for (int i = 0; i < 4; ++i) {
         if (g1.number[i] < g2.number[i]) {
             return false;
@@ -79,6 +83,10 @@ bool operator> (const Group& g1, const Group& g2) {
 bool operator< (const Group& g1, const Group& g2) {
     if (g1.degree < g2.degree) {
         return true;
+    }
+
+    if (g1.degree > g2.degree) {
+        return false;
     }
 
     for (int i = 0; i < 4; ++i) {
