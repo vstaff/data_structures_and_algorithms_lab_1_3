@@ -7,6 +7,8 @@
 #include "Group.h";
 #include "FIO.h";
 #include "Item.h";
+
+#include "sorts.h";
 using namespace std;
 
 int main() {
@@ -43,14 +45,11 @@ int main() {
 		cout << item << endl;
 	}
 
-	Group g1 = items[0].key1;
-	Group g2 = items[6].key1;
+	cout << "now let's try insertion sort (first key in decreasing order, second key in increasing order)\n";
+	insertionSort(items);
 
-	//cout << g1 == g2;
-	
-
-	if (g1 < g2) {
-		"asdf";
+	for (Item item : items) {
+		cout << item << endl;
 	}
 
 	return 0;

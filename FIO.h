@@ -30,7 +30,22 @@ public:
 		o = p_o;
 
 		setMaxLength(f + ' ' + i + ' ' + o);
-		
+	}
+
+	friend bool operator== (const FIO& fio1, const FIO& fio2) {
+		return (fio1.f + fio1.i + fio1.o) == (fio2.f + fio2.i + fio2.o);
+	}
+
+	friend bool operator!= (const FIO& fio1, const FIO& fio2) {
+		return (fio1.f + fio1.i + fio1.o) != (fio2.f + fio2.i + fio2.o);
+	}
+
+	friend bool operator> (const FIO& fio1, const FIO& fio2) {
+		return (fio1.f + fio1.i + fio1.o) > (fio2.f + fio2.i + fio2.o);
+	}
+
+	friend bool operator< (const FIO& fio1, const FIO& fio2) {
+		return (fio1.f + fio1.i + fio1.o) < (fio2.f + fio2.i + fio2.o);
 	}
 };
 
@@ -79,14 +94,4 @@ std::ostream& operator << (std::ostream& os, const FIO& fio) {
 	return os << fioString;
 }
 
-//std::ostream& operator << (std::ostream& os, const FIO& fio) {
-//	string fioString = fio.f + fio.i + fio.o;
-//
-//	//if (fio.getMaxLength())
-//
-//	int n = fio.
-//
-//	return os << fio.f << " " << fio.i << " " << fio.o;
-//}
-
-#endif 
+#endif

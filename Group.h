@@ -59,8 +59,8 @@ bool operator!= (const Group& g1, const Group& g2) {
 }
 
 bool operator> (const Group& g1, const Group& g2) {
-    if (g1.degree < g2.degree) {
-        return false;
+    if (g1.degree > g2.degree) {
+        return true;
     }
 
     for (int i = 0; i < 4; ++i) {
@@ -77,7 +77,21 @@ bool operator> (const Group& g1, const Group& g2) {
 }
 
 bool operator< (const Group& g1, const Group& g2) {
-    return !(g1 > g2);
+    if (g1.degree < g2.degree) {
+        return true;
+    }
+
+    for (int i = 0; i < 4; ++i) {
+        if (g1.number[i] > g2.number[i]) {
+            return false;
+        }
+
+        if (g1.number[i] < g2.number[i]) {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 Group getGroup(std::string line) {
