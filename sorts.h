@@ -8,15 +8,15 @@ using namespace std;
 
 // первая сортировка - простыми вставками (по убыванию первого ключа, по возрастанию второго ключа)
 template <typename T>
-void insertionSort(vector<T>& v) {
+vector<T> insertionSort(vector<T> v, int step=1) {
 	// индекс последнего элемента в отсортированной части массива 
 	int lastIndexInSorted = 0;
-	for (int i = 1; i < v.size(); ++i) {
+	for (int i = 1; i < v.size(); i += step) {
 		// текущий элемент в неотсортированной части массива (вектора)
 		T currentInOrigin = v.at(i);
 		int oldI = i;
 
-		for (int j = lastIndexInSorted; j > -1; --j) {
+		for (int j = lastIndexInSorted; j > -1; j -= step) {
 			T currentInSorted = v.at(j);
 
 			/*if (currentInSorted < currentInOrigin) {*/
@@ -26,12 +26,12 @@ void insertionSort(vector<T>& v) {
 				v[i] = v[j];
 				v[j] = copy;
 
-				--i;
+				i -= step;
 			}
 
 			/*else if (currentInOrigin == currentInSorted) {*/
 			else if (v.at(i) == v.at(j)) {
-				--i;
+				i -= step;
 				continue;
 			}
 
@@ -43,6 +43,20 @@ void insertionSort(vector<T>& v) {
 		i = oldI;
 		lastIndexInSorted = i;
 	}
+
+	return v;
+}
+
+template <typename T>
+vector<T> shellSort(vector<T> v) {
+	int d = v.size() / 2;
+
+	while (d > 0) {
+		v = insertionSort(v, d);
+		d /= 2;
+	}
+
+	return v;
 }
 
 #endif

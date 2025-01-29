@@ -46,11 +46,22 @@ int main() {
 	}
 
 	cout << "now let's try insertion sort (first key in decreasing order, second key in increasing order)\n";
-	insertionSort(items);
+	vector<Item> items_insertion_sort = insertionSort(items);
 
-	for (Item item : items) {
+	for (Item item : items_insertion_sort) {
 		cout << item << endl;
 	}
+
+	cout << "now let's try shell sort (first key in decreasing order, second key in increasing order)\n";
+	vector<Item> items_shell_sort = shellSort(items);
+
+	for (Item item : items_shell_sort) {
+		cout << item << endl;
+	}
+
+	cout << "vector is still the same:\n";
+
+	for (Item item : items) { cout << item << endl; }
 
 	return 0;
 }
