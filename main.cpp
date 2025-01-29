@@ -5,25 +5,33 @@
 #include <vector>
 #include <time.h>
 
-#include "Group.h";
-#include "FIO.h";
-#include "Item.h";
+#include "Group.h"
+#include "FIO.h"
+#include "Item.h"
 
-#include "sorts.h";
+#include "util.h"
+
+#include "sorts.h"
 using namespace std;
 
 int main() {
 	setlocale(LC_ALL, "Russian");
 
-	string line;
+	// тестим генерацию файла случайных данных 
+	srand(time(0));
+	ofstream randomItems("random_items.txt");
 
-	ifstream in("input5.txt");
+	getRandomItems(5000, randomItems);
+	randomItems.close();
+
+	ifstream in("random_items.txt");
 
 	if (!in.is_open()) {
-		cout << "hasn't found the file";
+		cout << "не получилось открыть файл\n";
 		return 0;
 	}
 
+	string line;
 	int n;
 	cout << "type n: ";
 	cin >> n;
@@ -31,7 +39,7 @@ int main() {
 	vector<Item> items;
 	unsigned int row = 0;
 
-	while (getline(in, line) && (row < n)) {
+	while (getline(in, line) && row < n) {
 		++row;
 
 		string key1String = line.substr(0, 5);
@@ -44,23 +52,17 @@ int main() {
 		items.push_back(item);
 	}
 
-	cout << "here is vector\n";
-
-	for (Item item : items) {
-		cout << item << endl;
-	}
-
 	cout << "now let's try insertion sort (first key in decreasing order, second key in increasing order)\n";
-	
+
 	clock_t start = clock();
 	vector<Item> items_insertion_sort = insertionSort(items);
 	clock_t end = clock();
 
 	double result = (double)(end - start) / CLOCKS_PER_SEC;
-	
+
 	// запись отсортированного (с помощью сортировки простыми вставками) вектора в файл
 	ofstream out;
-	out.open("input5_insertion_sort_output.txt");
+	out.open("random_items_insertion_sort_output.txt");
 
 	if (!out.is_open()) {
 		cout << "не получается открыть файл для записи\n";
@@ -82,7 +84,7 @@ int main() {
 	result = (double)(end - start) / CLOCKS_PER_SEC;
 
 	// запись отсортированного (с помощью сортировки шелла) вектора в файл
-	out.open("input5_shell_sort_output.txt");
+	out.open("random_items_shell_sort_output.txt");
 
 	if (!out.is_open()) {
 		cout << "не получается открыть файл для записи\n";
@@ -95,9 +97,11 @@ int main() {
 	out << result;
 	out.close();
 
-	cout << "vector is still the same:\n";
-
-	for (Item item : items) { cout << item << endl; }
-
 	return 0;
 }
+
+
+
+
+
+

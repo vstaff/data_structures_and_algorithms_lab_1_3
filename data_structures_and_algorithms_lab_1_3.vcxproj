@@ -140,6 +140,7 @@
     <Text Include="input5_insertion_sort_output.txt" />
     <Text Include="input5_shell_sort_output.txt" />
     <Text Include="otchestva.txt" />
+    <Text Include="random_items.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FIO.h" />

@@ -59,6 +59,9 @@
     <Text Include="otchestva.txt">
       <Filter>Исходные файлы\text_files</Filter>
     </Text>
+    <Text Include="random_items.txt">
+      <Filter>Исходные файлы\text_files\tests</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Group.h">
