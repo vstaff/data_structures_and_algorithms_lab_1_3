@@ -18,6 +18,10 @@ public:
 	string i;
 	string o;
 
+	string stringify() {
+		return f + ' ' + i + ' ' + o;
+	}
+
 	FIO() {
 		f = "нет фамилии";
 		i = "нет имени";

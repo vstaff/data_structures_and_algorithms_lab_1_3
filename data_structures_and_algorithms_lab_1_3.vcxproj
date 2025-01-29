@@ -130,17 +130,23 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="familii.txt" />
+    <Text Include="imena.txt" />
     <Text Include="input.txt" />
     <Text Include="input2.txt" />
     <Text Include="input3.txt" />
     <Text Include="input4.txt" />
     <Text Include="input5.txt" />
+    <Text Include="input5_insertion_sort_output.txt" />
+    <Text Include="input5_shell_sort_output.txt" />
+    <Text Include="otchestva.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FIO.h" />
     <ClInclude Include="Group.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="sorts.h" />
+    <ClInclude Include="util.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
