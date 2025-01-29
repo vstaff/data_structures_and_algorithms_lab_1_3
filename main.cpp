@@ -52,6 +52,8 @@ int main() {
 		items.push_back(item);
 	}
 
+	in.close();
+
 	cout << "now let's try insertion sort (first key in decreasing order, second key in increasing order)\n";
 
 	clock_t start = clock();
@@ -99,9 +101,3 @@ int main() {
 
 	return 0;
 }
-
-
-
-
-
-
